@@ -137,7 +137,7 @@ const contentUpdates = getMarkdownSections(githubInfoMarkdown)
     const postedDate = getPostedDate({ sourceLabel, summary });
 
     return {
-      type: 'From github-info.md',
+      type: 'EduHub update',
       date: postedDate,
       section: section.title,
       title: entry.title,
@@ -151,167 +151,160 @@ const contentUpdates = getMarkdownSections(githubInfoMarkdown)
   .filter((update) => update.summary && update.hasDetails)
   .map(({ hasDetails, ...update }) => update);
 
-const latestContentUpdates = contentUpdates.filter((update) => update.section === 'Latest GitHub Updates');
-const supportingContentUpdates = contentUpdates.filter((update) => update.section !== 'Latest GitHub Updates');
-const latestBlogOrChangelogUpdates = latestContentUpdates.filter((update) =>
-  /github\s+(blog|changelog)/i.test(update.sourceLabel)
-);
-const latestOtherUpdates = latestContentUpdates.filter((update) =>
-  !/github\s+(blog|changelog)/i.test(update.sourceLabel)
-);
+const latestContentUpdates = contentUpdates.filter((update) => update.section === 'Latest EduHub Updates');
+const supportingContentUpdates = contentUpdates.filter((update) => update.section !== 'Latest EduHub Updates');
 
-const latestMarkdownHighlight = latestBlogOrChangelogUpdates.find(
-  (update) => update.title !== 'Latest GitHub Updates'
-) ?? latestContentUpdates.find((update) => update.title !== 'Latest GitHub Updates');
+const latestMarkdownHighlight = latestContentUpdates.find(
+  (update) => update.title !== 'Latest EduHub Updates'
+);
 
 const latestRelease = latestMarkdownHighlight
   ? {
-    eyebrow: 'Latest repository highlight',
+    eyebrow: 'Latest platform highlight',
     title: latestMarkdownHighlight.title,
     date: latestMarkdownHighlight.date,
     summary: latestMarkdownHighlight.summary,
     href: '#recent-updates',
   }
   : {
-    eyebrow: 'Latest release highlight',
-    title: 'Secret scanning in AI coding agents via the GitHub MCP Server',
-    date: 'GitHub Changelog · March 17, 2026',
+    eyebrow: 'Latest platform highlight',
+    title: 'EduHub onboarding now centralizes all student essentials',
+    date: publishedDateLabel,
     summary:
-      'GitHub now supports secret scanning in AI coding agents through the GitHub MCP Server, helping teams catch exposed credentials and sensitive data earlier in automated coding flows.',
-    href: 'https://github.blog/changelog/2026-03-17-secret-scanning-in-ai-coding-agents-via-the-github-mcp-server/',
+      'EduHub brings academic information, study material, previous exam papers, and announcements into one accessible student platform.',
+    href: '#content-sources',
   };
 
 const recentUpdates = [
   {
-    type: 'GitHub Changelog',
-    date: 'March 20, 2026',
-    title: 'Copilot usage metrics now resolve auto model selection to actual models',
+    type: 'Student Services',
+    date: 'August 2026',
+    title: 'Centralized information desk',
     summary:
-      'Organizations now get clearer visibility into which underlying models were actually used when Copilot auto model selection is enabled.',
-    href: 'https://github.blog/changelog/2026-03-20-copilot-usage-metrics-now-resolve-auto-model-selection-to-actual-models/',
+      'Students can now find course schedules, department contacts, and policy updates in one location.',
+    href: '#content-sources',
   },
   {
-    type: 'GitHub Changelog',
-    date: 'March 19, 2026',
-    title: 'View code and comments side-by-side in pull request Files changed page',
+    type: 'Learning Resources',
+    date: 'August 2026',
+    title: 'Material library by subject',
     summary:
-      'GitHub improved pull request review by letting developers see code and review comments together in one view.',
-    href: 'https://github.blog/changelog/2026-03-19-view-code-and-comments-side-by-side-in-pull-request-files-changed-page/',
+      'Lecture notes, slides, recordings, and links are organized so students can revise faster.',
+    href: '#content-sources',
   },
   {
-    type: 'GitHub Blog',
-    date: 'March 19, 2026',
-    title: 'How Squad runs coordinated AI agents inside your repository',
+    type: 'Exam Support',
+    date: 'August 2026',
+    title: 'Previous exam papers in one archive',
     summary:
-      'This deep dive explains how repository-native multi-agent workflows can stay inspectable, predictable, and collaborative.',
-    href: 'https://github.blog/2026-03-19-how-squad-runs-coordinated-ai-agents-inside-your-repository/',
+      'Students can practice with earlier question papers using department and semester filters.',
+    href: '#content-sources',
   },
   {
-    type: 'GitHub Blog',
-    date: 'March 19, 2026',
-    title: 'Rethinking open source mentorship in the AI era',
+    type: 'Campus Announcements',
+    date: 'August 2026',
+    title: 'Announcement feed with priority notices',
     summary:
-      'GitHub explores a practical framework for scaling mentorship as AI-driven contributions increase across open source projects.',
-    href: 'https://github.blog/2026-03-19-rethinking-open-source-mentorship-in-the-ai-era/',
+      'Deadline reminders and urgent updates are highlighted first so students never miss key information.',
+    href: '#content-sources',
   },
 ];
 
 const homepageUpdates = [
-  ...latestBlogOrChangelogUpdates,
-  ...latestOtherUpdates,
+  ...latestContentUpdates,
   ...recentUpdates,
   ...supportingContentUpdates,
 ];
 
 const sourceGroups = [
   {
-    eyebrow: 'From docs.github.com',
-    title: 'The GitHub platform in one view',
+    eyebrow: 'Core feature',
+    title: 'Student information hub',
     description:
-      'GitHub documentation describes repositories, branches, pull requests, and merges as the core collaboration loop. Mona uses that same flow to keep website updates reviewable and safe.',
+      'EduHub gives students one place for academic updates, course details, schedules, and faculty communication.',
     bullets: [
-      'Repositories store and share code so teams can collaborate in one place.',
-      'Branches let contributors make changes safely before they are ready to merge.',
-      'Pull requests give collaborators a place to review changes and suggest improvements.',
+      'Department-wise notices and timelines in one dashboard.',
+      'Quick access to syllabus summaries and course requirements.',
+      'Important contacts available without searching multiple portals.',
     ],
-    link: 'https://docs.github.com/en/get-started/start-your-journey/about-github-and-git',
-    linkLabel: 'Read: About GitHub and Git',
+    link: '#recent-updates',
+    linkLabel: 'Explore dashboard updates',
   },
   {
-    eyebrow: 'From docs.github.com',
-    title: 'Copilot helps teams code, chat, and ship faster',
+    eyebrow: 'Core feature',
+    title: 'Learning material library',
     description:
-      'GitHub Copilot is documented as an AI coding assistant that works across the IDE, command line, mobile, and GitHub itself, making it a strong fit for Mona’s publishing workflow.',
+      'EduHub organizes lecture notes, slides, assignments, and recordings so study resources stay easy to find.',
     bullets: [
-      'Suggests code and content as you work.',
-      'Supports chat, CLI help, and pull request assistance.',
-      'Can work on changes and create a pull request for review on eligible plans.',
+      'Resources grouped by semester and subject.',
+      'Supports quick revision before quizzes and exams.',
+      'Single place to access official study material.',
     ],
-    link: 'https://docs.github.com/en/copilot/about-github-copilot/what-is-github-copilot',
-    linkLabel: 'Read: What is GitHub Copilot?',
+    link: '#recent-updates',
+    linkLabel: 'Browse learning resources',
   },
   {
-    eyebrow: 'From docs.github.com',
-    title: 'Actions turns repository events into automation',
+    eyebrow: 'Core feature',
+    title: 'Exam papers and announcements',
     description:
-      'GitHub Actions documentation explains how workflows, jobs, steps, actions, and runners fit together. Mona’s publishing pipeline uses the same building blocks.',
+      'EduHub combines previous exam papers and announcements so students can prepare and stay informed from a single platform.',
     bullets: [
-      'Workflows live in `.github/workflows` and can run on events, schedules, or manual dispatch.',
-      'Jobs can run sequentially or in parallel depending on dependencies.',
-      'Reusable actions reduce repeated setup work in automation.',
+      'Past papers searchable by department and semester.',
+      'Pinned notices for urgent deadlines and changes.',
+      'One stream for both academic and admin announcements.',
     ],
-    link: 'https://docs.github.com/en/actions/get-started/understand-github-actions',
-    linkLabel: 'Read: Understand GitHub Actions',
+    link: '#recent-updates',
+    linkLabel: 'Open exam and announcement section',
   },
 ];
 
 const highlights = [
   {
-    title: 'Newest signals first',
-    text: 'The homepage now leads with changelog and blog items so readers see fresh GitHub movement before deeper reference material.',
+    title: 'Everything in one place',
+    text: 'EduHub gathers student information, learning material, exam papers, and announcements in one app.',
   },
   {
-    title: 'Trusted sources',
-    text: 'Every card points back to official GitHub references from docs, the blog, or the changelog.',
+    title: 'Built for fast access',
+    text: 'Students can quickly move from information to materials and papers without switching platforms.',
   },
   {
-    title: 'Review-first workflow',
-    text: 'Mona keeps automation inside a pull request flow so every update can be checked before it goes live.',
+    title: 'Ready for daily use',
+    text: 'Regular announcements and updates keep students informed throughout the semester.',
   },
 ];
 ---
 
 <BaseLayout
-  title="Mona's GitHub Info"
-  description="Mona's Astro website for the latest GitHub releases, blog stories, changelog highlights, and docs-backed guidance."
+  title="EduHub"
+  description="EduHub is a learning platform for students to access information, materials, previous exam papers, and announcements in one place."
 >
   <main class="page-shell">
     <section class="hero">
       <div class="hero__copy">
-        <span class="eyebrow">Mona's Astro website</span>
-        <h1>The newest GitHub updates, organized for busy developers.</h1>
+        <span class="eyebrow">EduHub student platform</span>
+        <h1>Your information, materials, exam papers, and announcements in one place.</h1>
         <p class="lead">
-          Mona’s GitHub Info site now leads with what is freshest from the GitHub Blog and Changelog, then
-          gives readers the docs context they need lower on the page.
+          EduHub helps students stay on track by centralizing academic information and study resources in a
+          single, easy-to-use learning platform.
         </p>
 
         <div class="hero__actions">
-          <a class="button button--primary" href="#latest-release">See latest release</a>
-          <a class="button button--ghost" href="#recent-updates">Browse fresh updates</a>
+          <a class="button button--primary" href="#latest-release">View latest update</a>
+          <a class="button button--ghost" href="#recent-updates">Explore student resources</a>
         </div>
 
         <div class="mini-stats">
           <article>
             <strong>1</strong>
-            <span>featured release headline</span>
+            <span>featured platform update</span>
           </article>
           <article>
             <strong>{homepageUpdates.length}</strong>
-            <span>content-backed update cards</span>
+            <span>student-focused update cards</span>
           </article>
           <article>
             <strong>3</strong>
-            <span>docs references for deeper learning</span>
+            <span>core learning feature groups</span>
           </article>
         </div>
       </div>
@@ -320,24 +313,24 @@ const highlights = [
         <div class="orb orb--pink"></div>
         <div class="orb orb--blue"></div>
         <div class="hero-card hero-card--mona">
-          <img src={mona.src} alt="Mona character artwork" loading="eager" />
+          <img src={mona.src} alt="Student dashboard illustration" loading="eager" />
           <div>
-            <p>Mona</p>
-            <span>Curates the signal from GitHub’s fastest-moving updates</span>
+            <p>Information</p>
+            <span>One dashboard for schedules, contacts, and academic updates</span>
           </div>
         </div>
         <div class="hero-card hero-card--copilot">
-          <img src={copilot.src} alt="GitHub Copilot artwork" />
+          <img src={copilot.src} alt="Learning materials illustration" />
           <div>
-            <p>Copilot</p>
-            <span>Helps summarize and shape the newest information</span>
+            <p>Materials</p>
+            <span>Course notes, slides, and recordings organized by subject</span>
           </div>
         </div>
         <div class="hero-card hero-card--ducky">
-          <img src={ducky.src} alt="Ducky character artwork" />
+          <img src={ducky.src} alt="Announcements illustration" />
           <div>
-            <p>Ducky</p>
-            <span>Keeps the homepage cheerful and approachable</span>
+            <p>Updates</p>
+            <span>Previous exam papers and announcements available instantly</span>
           </div>
         </div>
       </div>
@@ -349,29 +342,29 @@ const highlights = [
         <h2>{latestRelease.title}</h2>
         <p class="release-spotlight__meta">{latestRelease.date}</p>
         <p>{latestRelease.summary}</p>
-        <a class="button button--primary" href={latestRelease.href} target="_blank" rel="noreferrer">
-          Open changelog item
+        <a class="button button--primary" href={latestRelease.href}>
+          Read update details
         </a>
       </div>
       <div class="release-spotlight__media">
-        <img src={copilot.src} alt="Copilot artwork next to the latest release headline" />
+        <img src={copilot.src} alt="Learning platform update illustration" />
       </div>
     </section>
 
     <section class="updates" id="recent-updates">
       <div class="section-heading">
-        <span class="eyebrow">Newest information first</span>
-        <h2>Repository notes, blog stories, and changelog updates</h2>
+        <span class="eyebrow">What students can access</span>
+        <h2>Platform updates and key student resources</h2>
         <p>
-          Mona now surfaces updates from <code>site/content/github-info.md</code> alongside curated GitHub Blog and
-          Changelog stories, so the homepage changes when the repository content changes.
+          EduHub surfaces updates from <code>site/content/github-info.md</code> so the homepage always reflects
+          the latest student support information.
         </p>
       </div>
 
       <div class="updates-grid">
         {homepageUpdates.map((update) => (
           <article class="update-card">
-            <span class:list={["pill", update.type === 'GitHub Changelog' ? 'pill--gold' : 'pill--violet']}>
+            <span class:list={["pill", /announcement/i.test(update.type) ? 'pill--gold' : 'pill--violet']}>
               {update.type}
             </span>
             <p class="update-card__date">{update.date}</p>
@@ -389,7 +382,7 @@ const highlights = [
               target={update.href.startsWith('#') ? undefined : '_blank'}
               rel={update.href.startsWith('#') ? undefined : 'noreferrer'}
             >
-              {update.href.startsWith('#') ? 'Review repository content' : 'Read official source'}
+              {update.href.startsWith('#') ? 'Open platform section' : 'Read source details'}
             </a>
           </article>
         ))}
@@ -407,30 +400,29 @@ const highlights = [
 
     <section class="feature-band">
       <div class="feature-band__copy">
-        <span class="eyebrow">Why this homepage structure works</span>
-        <h2>Freshness at the top, reference depth lower down</h2>
+        <span class="eyebrow">Why EduHub helps students</span>
+        <h2>Everything needed for learning and preparation</h2>
         <p>
-          The top of the page acts like a GitHub briefing: latest release headline first, then recent stories and
-          product updates. Lower sections help readers go deeper with official docs.
+          EduHub is designed to reduce the time students spend searching for information by combining material,
+          previous exam papers, and announcements in one workflow.
         </p>
         <ul class="checklist">
-          <li>Lead with the newest changelog and blog signals.</li>
-          <li>Give readers short summaries before they leave the page.</li>
-          <li>Keep docs available lower down for learning and follow-up.</li>
+          <li>Find course information and notices from one dashboard.</li>
+          <li>Access study materials and exam papers without jumping between portals.</li>
+          <li>Track announcements and deadlines in real time.</li>
         </ul>
       </div>
       <div class="feature-band__media">
-        <img src={mona.src} alt="Mona artwork for site structure explanation" />
+        <img src={mona.src} alt="EduHub overview illustration" />
       </div>
     </section>
 
     <section class="story-grid" id="content-sources">
       <div class="section-heading">
-        <span class="eyebrow">Reference shelf</span>
-        <h2>GitHub docs for deeper context</h2>
+        <span class="eyebrow">Feature overview</span>
+        <h2>Core sections inside EduHub</h2>
         <p>
-          Once readers have scanned the newest updates, they can move into the documentation section for the core
-          GitHub concepts behind Mona’s summaries.
+          Students can move through information, materials, exam preparation, and announcements from one central place.
         </p>
       </div>
 
@@ -453,20 +445,20 @@ const highlights = [
 
     <section class="closing-callout">
       <div class="closing-callout__copy">
-        <span class="eyebrow">Mona’s publishing promise</span>
-        <h2>Fast updates, human judgment, cheerful branding.</h2>
+        <span class="eyebrow">EduHub promise</span>
+        <h2>One student app for learning, preparation, and updates.</h2>
         <p>
-          Mona uses official GitHub sources to stay current, keeps the newest information near the top, and still
-          treats review as part of the publishing process.
+          EduHub keeps every essential student resource together so learners can focus on progress instead of
+          searching across multiple systems.
         </p>
         <div class="source-links">
-          <a href="https://docs.github.com/" target="_blank" rel="noreferrer">docs.github.com</a>
-          <a href="https://github.blog/" target="_blank" rel="noreferrer">github.blog</a>
-          <a href="https://github.blog/changelog/" target="_blank" rel="noreferrer">github.blog/changelog</a>
+          <a href="#recent-updates">Information & resources</a>
+          <a href="#content-sources">Core feature sections</a>
+          <a href="#latest-release">Latest EduHub update</a>
         </div>
       </div>
       <div class="closing-callout__art">
-        <img src={ducky.src} alt="Ducky artwork standing in for a cheerful mascot" />
+        <img src={ducky.src} alt="EduHub closing illustration" />
       </div>
     </section>
   </main>
