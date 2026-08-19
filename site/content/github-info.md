@@ -1,16 +1,35 @@
-# GitHub Info
+# EduHub Content
 
-## Mona's editorial angle
+## Latest EduHub Updates
 
-Mona's website focuses on practical GitHub guidance backed by official references from:
+### Semester kickoff orientation is now available
+EduHub now has a guided orientation page that explains where to find course details, learning material, and support resources.
+- New students can complete onboarding in one place.
+- Returning students can quickly review updated timelines.
+Source: Campus Academic Office · August 2026
 
-- docs.github.com
-- github.blog
-- github.blog/changelog
+### Midterm paper bank expanded
+Previous exam papers from recent semesters have been organized by subject and uploaded to the exam paper section.
+- Students can filter papers by department and semester.
+- Practice questions are grouped to support revision planning.
+Source: Examination Cell · August 2026
 
-## Current homepage themes
+### Weekly announcements feed launched
+A dedicated announcements feed now highlights deadline reminders, holiday notices, and class updates.
+- Important updates are pinned at the top.
+- Students can scan all announcements without switching apps.
+Source: Student Affairs Desk · August 2026
 
-- GitHub collaboration basics: repositories, branches, pull requests, and merges.
-- GitHub Copilot as an AI coding assistant across the IDE, CLI, and GitHub.
-- GitHub Actions as the automation layer behind repository workflows.
-- Recent GitHub Blog and Changelog stories worth watching.
+## Core EduHub Features
+
+### Information dashboard
+EduHub brings course schedules, syllabi, faculty contacts, and key academic dates into a single dashboard for students.
+
+### Learning material library
+Lecture notes, slides, recordings, and reference links are organized subject-wise so students can access study material quickly.
+
+### Previous exam papers
+Students can browse and download earlier exam papers to prepare with real question patterns.
+
+### Announcements center
+EduHub centralizes academic and administrative announcements so nothing important is missed.
